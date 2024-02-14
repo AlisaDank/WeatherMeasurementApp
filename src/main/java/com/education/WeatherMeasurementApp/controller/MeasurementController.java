@@ -39,7 +39,7 @@ public class MeasurementController {
     }
 
     @GetMapping("/rainyDaysCount")
-    public Long getRainyDaysCount() {
+    public long getRainyDaysCount() {
         return measurementService.getRainyDaysCount();
     }
 

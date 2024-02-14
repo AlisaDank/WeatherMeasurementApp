@@ -1,7 +1,6 @@
 package com.education.WeatherMeasurementApp.service;
 
 import com.education.WeatherMeasurementApp.model.Measurement;
-import com.education.WeatherMeasurementApp.model.Sensor;
 import com.education.WeatherMeasurementApp.repository.MeasurementRepository;
 import com.education.WeatherMeasurementApp.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,19 @@ public class MeasurementService {
         return measurementRepository.findAll();
     }
 
-    public Long getRainyDaysCount() {
-        List<Measurement> measurements = measurementRepository.findAll();
-
-        return measurements.stream().filter(Measurement::isRaining).count();
+    public long getRainyDaysCount() {
+        long count = 0L;
+        List<Measurement> measurementsWithRaining = measurementRepository.findAll()
+                .stream().filter(Measurement::isRaining).toList();
+        if (!measurementsWithRaining.isEmpty()) count++;
+        for (int i = 0; i < measurementsWithRaining.size() - 1; i++) {
+            if (measurementsWithRaining.get(i).getCreatedDate()
+                    .equals(measurementsWithRaining.get(i + 1).getCreatedDate())) {
+                continue;
+            }
+            count += 1;
+        }
+        return count;
     }
 
     @Transactional
