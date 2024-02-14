@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -67,5 +68,9 @@ public class Measurement {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDateTime.toLocalDate();
     }
 }

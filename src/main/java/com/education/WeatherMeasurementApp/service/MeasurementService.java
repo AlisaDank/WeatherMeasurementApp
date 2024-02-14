@@ -32,8 +32,8 @@ public class MeasurementService {
                 .stream().filter(Measurement::isRaining).toList();
         if (!measurementsWithRaining.isEmpty()) count++;
         for (int i = 0; i < measurementsWithRaining.size() - 1; i++) {
-            if (measurementsWithRaining.get(i).getCreatedDateTime().toLocalDate()
-                    .equals(measurementsWithRaining.get(i + 1).getCreatedDateTime().toLocalDate())) {
+            if (measurementsWithRaining.get(i).getCreatedDate()
+                    .equals(measurementsWithRaining.get(i + 1).getCreatedDate())) {
                 continue;
             }
             count += 1;
